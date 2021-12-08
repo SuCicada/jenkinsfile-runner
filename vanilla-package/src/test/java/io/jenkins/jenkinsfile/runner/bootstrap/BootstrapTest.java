@@ -45,7 +45,9 @@ public class BootstrapTest {
             "run"
             , "-w", "C:\\Users\\ZQ091606\\Documents\\PROGRAM\\GitHub\\jenkinsfile-runner\\vanilla-package\\target\\war"
             , "-p", "C:\\Users\\ZQ091606\\Documents\\PROGRAM\\GitHub\\jenkinsfile-runner\\vanilla-package\\target\\plugins"
-            , "-f", "C:\\Users\\ZQ091606\\Documents\\PROGRAM\\GitHub\\jenkinsfile-runner\\bootstrap\\src\\test\\Jenkinsfile"
+            , "-f", "C:\\Users\\ZQ091606\\Documents\\PROGRAM\\GitHub\\jenkinsfile-runner\\vanilla-package\\src\\test\\Jenkinsfile"
+            , "--runWorkspace", "C:\\Users\\ZQ091606\\Documents\\PROGRAM\\GitLab\\hac-hadoop"
+            , "-a", "BASH=C:\\Program Files\\Git\\bin\\bash.exe"
         );
     }
 }
