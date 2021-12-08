@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>io.jenkins.jenkinsfile-runner</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0-beta-31-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>dist</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>io.jenkins.jenkinsfile-runner</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jenkins.jenkinsfile-runner</groupId>
+            <artifactId>setup</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jenkins.jenkinsfile-runner</groupId>
+            <artifactId>payload</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>credentials</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins.workflow</groupId>
+            <artifactId>workflow-job</artifactId>
+            <version>2.41</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins.workflow</groupId>
+            <artifactId>workflow-cps</artifactId>
+            <version>2.94</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.modules</groupId>
+            <artifactId>instance-identity</artifactId>
+            <version>2.2</version>
+        </dependency>
+    </dependencies>
+
+    <!--<build>-->
+    <!--    <finalName>jenkinsfile-runner</finalName>-->
+    <!--    <plugins>-->
+    <!--        <plugin>-->
+    <!--            <groupId>org.apache.maven.plugins</groupId>-->
+    <!--            <artifactId>maven-jar-plugin</artifactId>-->
+    <!--            <configuration>-->
+    <!--                <archive>-->
+    <!--                    <manifest>-->
+    <!--                        <mainClass>io.jenkins.jenkinsfile.runner.bootstrap.Bootstrap</mainClass>-->
+    <!--                        <addClasspath>true</addClasspath>-->
+    <!--                    </manifest>-->
+    <!--                </archive>-->
+    <!--            </configuration>-->
+    <!--        </plugin>-->
+    <!--        <plugin>-->
+    <!--            <groupId>org.apache.maven.plugins</groupId>-->
+    <!--            <artifactId>maven-shade-plugin</artifactId>-->
+    <!--            <version>3.2.0</version>-->
+    <!--            <configuration>-->
+    <!--                <createDependencyReducedPom>false</createDependencyReducedPom>-->
+    <!--            </configuration>-->
+    <!--            <executions>-->
+    <!--                <execution>-->
+    <!--                    <phase>package</phase>-->
+    <!--                    <goals>-->
+    <!--                        <goal>shade</goal>-->
+    <!--                    </goals>-->
+    <!--                    <configuration>-->
+    <!--                        <artifactSet>-->
+    <!--                            <includes>-->
+    <!--                                <include>io.jenkins.jenkinsfile-runner:*</include>-->
+    <!--                                <include>org.jenkins-ci.plugins:credentials</include>-->
+    <!--                                <include>org.jenkins-ci.plugins.workflow:workflow-job</include>-->
+    <!--                                <include>org.jenkins-ci.plugins.workflow:workflow-cps</include>-->
+    <!--                                <include>info.picocli:picocli</include>-->
+    <!--                                <include>commons-io:commons-io</include>-->
+    <!--                                <include>org.jenkins-ci:version-number</include>-->
+    <!--                                <include>org.jenkins-ci:*</include>-->
+    <!--                                <include>io.jenkins.lib:support-log-formatter</include>-->
+    <!--                                &lt;!&ndash; jenkins-core 已经包含在 war 中了， 之后想办法直接从 war 中读取 &ndash;&gt;-->
+    <!--                                <include>org.jenkins-ci.main:jenkins-core</include>-->
+    <!--                                <include>org.jenkins-ci.main:remoting</include>-->
+    <!--                                <include>org.kohsuke.stapler:stapler</include>-->
+    <!--                                <include>org.eclipse.jetty:jetty-util</include>-->
+    <!--                                <include>org.eclipse.jetty:jetty-server</include>-->
+    <!--                                <include>org.eclipse.jetty:jetty-security</include>-->
+    <!--                                <include>org.eclipse.jetty:jetty-http</include>-->
+    <!--                                <include>org.eclipse.jetty:*</include>-->
+    <!--                                <include>javax.servlet:*</include>-->
+    <!--                                <include>org.jvnet.localizer:localizer</include>-->
+    <!--                            </includes>-->
+    <!--                        </artifactSet>-->
+    <!--                        <filters>-->
+    <!--                            <filter>-->
+    <!--                                <artifact>*:*</artifact>-->
+    <!--                                <excludes>-->
+    <!--                                    <exclude>META-INF/*.SF</exclude>-->
+    <!--                                    <exclude>META-INF/*.DSA</exclude>-->
+    <!--                                    <exclude>META-INF/*.RSA</exclude>-->
+    <!--                                </excludes>-->
+    <!--                            </filter>-->
+    <!--                        </filters>-->
+    <!--                    </configuration>-->
+    <!--                </execution>-->
+    <!--            </executions>-->
+    <!--        </plugin>-->
+    <!--    </plugins>-->
+    <!--</build>-->
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <finalName>jenkinsfile-runner</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>io.jenkins.jenkinsfile.runner.bootstrap.Bootstrap</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+

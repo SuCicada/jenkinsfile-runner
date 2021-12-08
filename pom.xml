@@ -57,7 +57,8 @@ THE SOFTWARE.
     <module>packaging-parent-resources</module>
     <module>packaging-parent-pom</module>
     <module>packaging-slim-parent-pom</module>
-    <!-- more modules come from profiles -->
+      <module>dist</module>
+      <!-- more modules come from profiles -->
   </modules>
 
   <properties>
